@@ -21,7 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Payment status tracking
     let paymentMade = false;
-    
+    // Check if user was redirected back with ?paid=true
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("paid") === "true") {
+    paymentMade = true;
+    handleSuccessfulPayment();
+}
     // Generate resume with OpenAI GPT-4
     async function generateResume(formData) {
         // IMPORTANT: In a production environment, API calls should be made through a server
