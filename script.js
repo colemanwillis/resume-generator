@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let paymentMade = false;
 
-    // Check URL for ?paid=true param
+    // ✅ Detect PayPal return param
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("paid") === "true") {
         paymentMade = true;
@@ -248,14 +248,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function generateResume(formData) {
-        const apiKey = "YOUR_OPENAI_API_KEY"; // Optional: add API key
+        const apiKey = "YOUR_OPENAI_API_KEY"; // Optional
         const apiUrl = "https://api.openai.com/v1/chat/completions";
 
         const messages = [
             {
                 role: "system",
-                content: `You are an expert resume writer specializing in creating professional one-page resumes...
-Return ONLY valid HTML with NO markdown formatting or explanations.`
+                content: `You are an expert resume writer specializing in creating professional one-page resumes...`
             },
             {
                 role: "user",
@@ -290,11 +289,11 @@ ${formData.skills}`
                 })
             });
 
-            if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
+            if (!response.ok) throw new Error(`API failed: ${response.status}`);
             let resumeHTML = (await response.json()).choices[0].message.content.trim();
             return resumeHTML.replace(/```html|```/g, '').trim();
         } catch (err) {
-            console.warn("Falling back to local formatter:", err);
+            console.warn("Fallback to local formatter:", err);
             return formatResume(formData);
         }
     }
@@ -307,15 +306,6 @@ ${formData.skills}`
         paypalButton.classList.add('payment-success');
         paypalButton.href = '#';
         paypalButton.onclick = function(e) { e.preventDefault(); };
-    }
-
-    function checkPayPalPayment() {
-        const paymentConfirmed = confirm("Did you complete the PayPal payment? (Click OK if you've paid)");
-        if (paymentConfirmed) {
-            paymentMade = true;
-            handleSuccessfulPayment();
-            window.removeEventListener('focus', checkPayPalPayment);
-        }
     }
 
     resumeForm.addEventListener('submit', async function(e) {
@@ -337,10 +327,6 @@ ${formData.skills}`
             previewSection.classList.remove('hidden');
             previewSection.classList.add('fade-in');
             previewSection.scrollIntoView({ behavior: 'smooth' });
-
-            if (!paymentMade) {
-                window.addEventListener('focus', checkPayPalPayment);
-            }
         } catch (error) {
             alert('Error generating resume. Please try again.');
         } finally {
