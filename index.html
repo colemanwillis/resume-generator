@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Auto Resume Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide-static@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-900 font-[Inter] antialiased">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">Auto Resume Generator</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">Create a professional resume in seconds with our AI-powered tool</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Input Form Section -->
+            <section class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-xl font-semibold mb-6 flex items-center">
+                    <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+                    Enter Your Information
+                </h2>
+                <form id="resumeForm" class="space-y-4">
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400" required>
+                    </div>
+                    
+                    <div>
+                        <label for="jobTitle" class="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
+                        <input type="text" id="jobTitle" name="jobTitle" class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400" required>
+                    </div>
+                    
+                    <div>
+                        <label for="workExperience" class="block text-sm font-medium text-gray-700 mb-1">Work Experience</label>
+                        <textarea id="workExperience" name="workExperience" rows="4" class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 font-geist-mono" placeholder="Company Name - Position (2020-Present)&#10;• Key responsibility or achievement&#10;• Another achievement&#10;&#10;Previous Company - Position (2018-2020)&#10;• Key responsibility" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="education" class="block text-sm font-medium text-gray-700 mb-1">Education</label>
+                        <textarea id="education" name="education" rows="3" class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 font-geist-mono" placeholder="University Name - Degree (2014-2018)&#10;• GPA: 3.8/4.0&#10;• Relevant coursework" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="skills" class="block text-sm font-medium text-gray-700 mb-1">Skills</label>
+                        <textarea id="skills" name="skills" rows="3" class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 font-geist-mono" placeholder="• JavaScript, React, Node.js&#10;• Project Management&#10;• Communication" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="summary" class="block text-sm font-medium text-gray-700 mb-1">Summary/Bio (Optional)</label>
+                        <textarea id="summary" name="summary" rows="3" class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400" placeholder="Brief professional summary highlighting your strengths and career goals"></textarea>
+                    </div>
+                    
+                    <button type="submit" id="generateBtn" class="w-full bg-black hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-md transition duration-200 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg>
+                        Generate Resume
+                    </button>
+                </form>
+            </section>
+
+            <!-- Resume Preview Section -->
+            <section id="previewSection" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold flex items-center">
+                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+                        Resume Preview
+                    </h2>
+                    <button id="editBtn" class="text-sm text-gray-600 hover:text-gray-800 flex items-center">
+                        <svg class="w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                        Edit
+                    </button>
+                </div>
+                
+                <div id="resumePreview" class="border border-gray-100 p-4 rounded-md mb-6 min-h-[400px] overflow-auto text-sm"></div>
+                
+                <div id="paymentSection" class="border border-gray-100 rounded-md p-4 bg-gray-50">
+                    <h3 class="text-lg font-medium mb-2">Download Your Resume</h3>
+                    <p class="text-gray-600 mb-4">Get your professionally formatted resume for just $5</p>
+                    
+                    <a href="https://paypal.me/CWillis645/5" target="_blank" id="paypalButton" class="block w-full bg-[#0070BA] hover:bg-[#005EA6] text-white font-medium py-2 px-4 rounded-md transition duration-200 text-center flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.067 7.301C20.067 4.873 18.066 2.872 15.638 2.872H10.031C9.625 2.872 9.281 3.175 9.229 3.579L7.069 16.587C7.027 16.903 7.272 17.185 7.589 17.185H10.477L10.869 14.824L10.855 14.911C10.906 14.506 11.249 14.204 11.656 14.204H12.939C15.744 14.204 17.946 12.865 18.399 9.684C18.599 8.433 18.397 7.368 17.729 6.614C17.567 6.427 17.379 6.262 17.167 6.12C18.062 6.549 18.68 7.319 18.94 8.389C18.994 8.664 19.024 8.949 19.024 9.245C19.024 9.248 19.024 9.251 19.024 9.254C19.024 9.258 19.024 9.261 19.024 9.264C19.024 12.446 16.821 13.784 14.016 13.784H12.734C12.326 13.784 11.983 14.087 11.931 14.491L11.282 18.622C11.247 18.892 11.455 19.135 11.728 19.135H14.097C14.452 19.135 14.757 18.872 14.803 18.52L14.835 18.324L15.128 16.499L15.17 16.238C15.215 15.886 15.52 15.623 15.875 15.623H16.166C18.631 15.623 20.566 14.446 20.959 11.651C21.315 9.717 20.915 8.105 19.744 7.122C19.846 7.179 19.946 7.239 20.041 7.303" fill="white"/>
+                            <path d="M17.167 6.12C17.026 6.068 16.879 6.022 16.727 5.981C16.575 5.941 16.417 5.905 16.252 5.876C15.629 5.78 14.934 5.743 14.179 5.743H10.029C9.825 5.743 9.639 5.822 9.506 5.95C9.352 6.099 9.258 6.31 9.228 6.552L7.868 15.063L7.069 16.587C7.027 16.904 7.272 17.186 7.589 17.186H10.477L10.869 14.824L11.282 12.107C11.333 11.703 11.676 11.4 12.083 11.4H13.366C16.171 11.4 18.372 10.062 18.826 6.881C18.862 6.652 18.882 6.435 18.889 6.227C18.655 6.203 18.406 6.19 18.144 6.19C17.805 6.19 17.48 6.209 17.167 6.246" fill="#EEEEEE"/>
+                            <path d="M9.506 5.951C9.639 5.822 9.825 5.743 10.029 5.743H14.179C14.934 5.743 15.629 5.78 16.252 5.876C16.417 5.905 16.575 5.941 16.727 5.981C16.879 6.022 17.026 6.068 17.167 6.12C17.48 6.209 17.805 6.19 18.144 6.19C18.406 6.19 18.655 6.203 18.89 6.227C18.944 5.702 18.89 5.377 18.73 4.93C18.355 3.896 17.168 3.372 15.638 3.372H10.031C9.625 3.372 9.281 3.675 9.229 4.08L7.069 17.087C7.027 17.404 7.272 17.685 7.589 17.685H10.477L11.282 12.107L9.506 5.951Z" fill="white"/>
+                        </svg>
+                        Pay with PayPal
+                    </a>
+                    
+                    <button id="downloadBtn" class="w-full bg-gray-200 text-gray-400 font-medium py-2 px-4 rounded-md cursor-not-allowed flex items-center justify-center" disabled>
+                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        Download PDF
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Loading Overlay -->
+            <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white p-8 rounded-lg shadow-xl flex flex-col items-center">
+                    <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-black mb-4"></div>
+                    <p class="text-lg font-medium">Generating your resume...</p>
+                    <p class="text-gray-500 text-sm mt-2">This may take a few seconds</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Marketing Content Section -->
+        <section id="marketingSection" class="mt-16 border-t border-gray-200 pt-8">
+            <h2 class="text-xl font-semibold mb-6">Share this tool</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Twitter Content -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-medium mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-[#1DA1F2]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                        Twitter
+                    </h3>
+                    <div class="text-sm text-gray-600 mb-3" id="twitterContent">Loading content...</div>
+                    <a href="#" id="copyTwitterBtn" class="text-gray-600 hover:text-gray-800 text-sm font-medium flex items-center">
+                        <svg class="w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy
+                    </a>
+                </div>
+                
+                <!-- Reddit Content -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-medium mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-[#FF4500]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 10c.47-.87 1.37-1.54 2-1 .63.54.53 1.88 0 3"/><path d="M9 10c-.47-.87-1.37-1.54-2-1-.63.54-.53 1.88 0 3"/><path d="M5.31 17.72A12.48 12.48 0 0 0 12 20.94c2.44 0 4.55-.7 6.07-1.95"/><path d="M8.5 14c.91 1.71 3.69 2.57 6.5 0"/></svg>
+                        Reddit
+                    </h3>
+                    <div class="text-sm text-gray-600 mb-3" id="redditContent">Loading content...</div>
+                    <a href="#" id="copyRedditBtn" class="text-gray-600 hover:text-gray-800 text-sm font-medium flex items-center">
+                        <svg class="w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy
+                    </a>
+                </div>
+                
+                <!-- LinkedIn Content -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-medium mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-[#0077B5]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        LinkedIn
+                    </h3>
+                    <div class="text-sm text-gray-600 mb-3" id="linkedinContent">Loading content...</div>
+                    <a href="#" id="copyLinkedinBtn" class="text-gray-600 hover:text-gray-800 text-sm font-medium flex items-center">
+                        <svg class="w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-16 text-center text-gray-500 text-sm py-6 border-t border-gray-200">
+            <p>Built with <a href="https://flowith.net" target="_blank" class="text-gray-700 hover:text-gray-900 font-medium">Flowith Oracle</a>.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="resumeTemplates.js"></script>
+    <script src="marketingContent.js"></script>
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener("wheel", (e)=> {
+          const isPinching = e.ctrlKey
+          if(isPinching) e.preventDefault()
+        }, { passive: false })
+    </script>
+</body>
+</html>

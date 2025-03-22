@@ -1,0 +1,153 @@
+/* Base styles */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Font classes */
+.font-geist-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    letter-spacing: -0.02em;
+}
+
+/* Resume preview styling */
+#resumePreview {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+#resumePreview h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: #111;
+}
+
+#resumePreview h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: #222;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.25rem;
+}
+
+#resumePreview h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+    color: #333;
+}
+
+#resumePreview ul {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+#resumePreview li {
+    margin-bottom: 0.25rem;
+}
+
+#resumePreview p {
+    margin-bottom: 0.5rem;
+}
+
+#resumePreview .job-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 0.75rem;
+}
+
+#resumePreview .role {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+#resumePreview .contact-info {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+#resumePreview .summary-section {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+#resumePreview .work-entry {
+    margin-bottom: 1.25rem;
+}
+
+/* PDF output styling */
+.resume-pdf {
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.75in;
+    font-family: 'Inter', sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+}
+
+/* Animation effects */
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Custom scrollbar */
+#resumePreview::-webkit-scrollbar {
+    width: 6px;
+}
+
+#resumePreview::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+#resumePreview::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 8px;
+}
+
+#resumePreview::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+}
+
+/* Payment success state */
+.payment-success {
+    background-color: #10B981 !important;
+    color: white !important;
+}
+
+/* Mobile responsiveness improvements */
+@media (max-width: 768px) {
+    #resumePreview {
+        font-size: 0.9rem;
+    }
+    
+    #resumePreview h1 {
+        font-size: 1.5rem;
+    }
+    
+    #resumePreview h2 {
+        font-size: 1.15rem;
+    }
+    
+    #resumePreview h3 {
+        font-size: 1rem;
+    }
+}
